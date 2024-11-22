@@ -35,7 +35,6 @@ int main(int argc, char* argv[]) {
 	while(1){
 		client = malloc(sizeof(int));
 		*client = accept(sockfd, NULL, NULL);
-		//pthread_create(&tid,NULL,client_handler, confd);
  	}
 
     sqlite3 *db = NULL;
