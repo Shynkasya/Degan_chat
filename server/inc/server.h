@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "sqlite3.h"
+#include <pthread.h>
 
 
 int open_database(const char* name, sqlite3 *db);

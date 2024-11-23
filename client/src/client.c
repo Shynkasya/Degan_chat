@@ -29,7 +29,8 @@ int main(int argc, char* argv[]) {
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
-
+	sleep(5);
+	send(sockfd, "TOM", sizeof("TOM"), 0);
 
     close(sockfd);
     return 0;

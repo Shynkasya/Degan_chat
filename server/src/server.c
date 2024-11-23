@@ -13,6 +13,24 @@ int error_handler(int argc, char* argv[]){
 	}
 	return port;
 }
+void *client_handler(void* client){
+	int sockfd = *(int*) client;
+	char buffer[1024];
+	printf("%i\n", sockfd);
+	recv(sockfd, buffer, 1024, 0);
+	printf("%s", buffer);
+	//sqlite3 *db = NULL;
+	//sqlite3_open("database/Uchat.db", &db);
+	
+	//sqlite3_close(db);
+	return NULL;
+	
+}
+void create_thread(int* client){
+	pthread_t thread;
+	pthread_create(&thread, NULL, &client_handler,(void*)client);
+	pthread_detach(thread);
+}
 
 int main(int argc, char* argv[]) {
 	int port = error_handler(argc, argv);
@@ -32,14 +50,17 @@ int main(int argc, char* argv[]) {
 		return -1;
 	}
 	int* client;
+    	sqlite3 *db = NULL;
+    	if(open_database("database/Uchat.db", db) == -1) return -1;
+
+
 	while(1){
 		client = malloc(sizeof(int));
 		*client = accept(sockfd, NULL, NULL);
+		printf("New client added\n");
+
+		create_thread(client);
  	}
-
-    sqlite3 *db = NULL;
-    if(open_database("database/Uchat.db", db) == -1) return -1;
-
 
 
     sqlite3_close(db);
