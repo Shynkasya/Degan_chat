@@ -9,8 +9,8 @@ int open_database(const char* name, sqlite3 *db){
 		sqlite3_close(db);
 		return -1;
 	}
-	char *sql = "CREATE TABLE IF NOT EXISTS User (Id INTEGER PRIMARY KEY, Username TEXT, Password TEXT);";
-    
+    char *sql = "CREATE TABLE IF NOT EXISTS User (Id INTEGER PRIMARY KEY, Username TEXT, Password_Hash TEXT, Email TEXT);";
+
 	rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 	if (rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", err_msg);
