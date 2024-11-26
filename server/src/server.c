@@ -1,5 +1,4 @@
 #include"../inc/server.h"
-#include <arpa/inet.h> //для inet_ntop()  и INET_ADDRSTRLEN
 
 int main(int argc, char* argv[]) {
 	int port = port_checker(argc, argv);

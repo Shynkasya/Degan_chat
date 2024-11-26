@@ -1,6 +1,5 @@
 #include"../inc/server.h"
 
-
 int open_database(const char* name, sqlite3 *db){
 	char* err_msg = NULL;
 	int rc = sqlite3_open(name, &db);

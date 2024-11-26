@@ -9,6 +9,7 @@
 #include "sqlite3.h"
 #include <string.h>
 #include <errno.h>
+#include <stddef.h>
 
 typedef struct Registration {
   char *name;
@@ -23,4 +24,5 @@ int Socket(int domain, int type, int protocol);
 int port_checker(int argc, char* argv[]);
 void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 void Listen(int sockfd, int backlog);
+
 int create_user(const char *name, sqlite3 *db, Reg incoming);
