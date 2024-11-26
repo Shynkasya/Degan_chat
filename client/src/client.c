@@ -43,6 +43,9 @@ int main(int argc, char* argv[]) {
 	}
 	
 
+    char *msg = "Hello from client!";
+    printf("Connection established!\n");
+    send(sockfd, msg, strlen(msg), 0);
     close(sockfd);
     return 0;
 }
