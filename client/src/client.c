@@ -1,10 +1,10 @@
-2#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#define SERVER_PORT 2000
+#define SERVER_PORT 8000
 
 
 int main(int argc, char* argv[]) {

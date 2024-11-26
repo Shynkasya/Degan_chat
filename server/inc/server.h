@@ -19,10 +19,19 @@ typedef struct Registration {
 
 int open_database(const char* name, sqlite3 *db);
 
+
+//Daemonisation
+void deamonization();
+
+
+
 //connection.c
 int Socket(int domain, int type, int protocol);
 int port_checker(int argc, char* argv[]);
 void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 void Listen(int sockfd, int backlog);
+
+
+
 
 int create_user(const char *name, sqlite3 *db, Reg incoming);
