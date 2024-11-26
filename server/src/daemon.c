@@ -2,13 +2,15 @@
 
 
 
-void deamonization(){
+void deamonisation(){
 	pid_t demonitsa;
 	demonitsa = fork();
 	if(demonitsa < 0) exit(EXIT_FAILURE);
 	if(demonitsa > 0) exit(EXIT_SUCCESS);
 	
+	umask(0);
 	if(setsid() < 0) exit(EXIT_FAILURE);
-	//umask(0);
-	
+	close(STDIN_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
 }

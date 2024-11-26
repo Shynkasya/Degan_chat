@@ -10,6 +10,8 @@
 #include <string.h>
 #include <errno.h>
 #include <stddef.h>
+#include <sys/stat.h>
+#include <pthread.h>
 
 typedef struct Registration {
   char *name;
@@ -17,11 +19,15 @@ typedef struct Registration {
   char *password_hash;
 } Reg;
 
-int open_database(const char* name, sqlite3 *db);
+
+
+//Database
+void open_database(const char* name, sqlite3 **db);
+void create_user_table(sqlite3** db);
 
 
 //Daemonisation
-void deamonization();
+void deamonisation();
 
 
 
@@ -30,6 +36,8 @@ int Socket(int domain, int type, int protocol);
 int port_checker(int argc, char* argv[]);
 void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 void Listen(int sockfd, int backlog);
+void initialise_adress(struct sockaddr_in *address, int port, int domain);
+int connect_to_port(int argc, char* argv[]);
 
 
 

@@ -7,7 +7,7 @@ LIBS = ../libraries/sqlite3/libsqlite3.a
 all: $(NAME)
 
 $(NAME):
-	mkdir obj
+	#mkdir obj
 	$(CC) $(CFLAGS) -o $(NAME) src/*.c $(LIBS)  
 
 clean:

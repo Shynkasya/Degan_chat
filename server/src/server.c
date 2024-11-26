@@ -1,45 +1,62 @@
 #include"../inc/server.h"
 
+void *client_handler(void* client){
+	int sockfd = *(int*) client;
+	free(client);
+	//int client_request;
+	
+	
+	//while(true){
+	//	recv(sockfd, client_request, sizeof(client_request), 0);
+	//
+	//	switch(client_request){
+	//	
+	//	
+	//	
+	//	}
+	//
+	//}
+	
+	
+	
+	char buffer[1024];
+	ssize_t bytes_read;
+	bytes_read = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
+	buffer[bytes_read] = '\0';
+    	close(sockfd);
+   	return NULL;
+	//sqlite3 *db = NULL;
+	//sqlite3_open("database/Uchat.db", &db);
+	
+	//sqlite3_close(db);
+}
+void create_thread(int* client){
+	pthread_t thread;
+	pthread_create(&thread, NULL, &client_handler,(void*)client);
+	pthread_detach(thread);
+}
+
+
 int main(int argc, char* argv[]) {
-	//deamonization();
-	int port = port_checker(argc, argv);
-	int sockfd = Socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in address6; //server address
-	address.sin_port = htons(port);
-	address.sin_family = AF_INET;
-	address.sin_addr.s_addr = INADDR_ANY;
-	Bind(sockfd, (struct sockaddr*)&address, sizeof(address));
-	Listen(sockfd, 5);
-	int clientfd;
-	struct sockaddr_in client_addr;
-	socklen_t addr_len = sizeof(client_addr); 
+	//deamonisation();
+	sqlite3 *db = NULL;
+    	open_database("database/Uchat.db", &db);
+
+    	create_user_table(&db);
+	int sockfd = connect_to_port(argc, argv);
+	int *clientfd;
 	while(1) {
-		clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &addr_len);
-		printf("My ip is %i\n", client_addr.sin_addr.s_addr);
-		if (clientfd < 0) {
+		clientfd = malloc(sizeof(int));
+		*clientfd = accept(sockfd, NULL, NULL);
+		if (*clientfd < 0) {
 			perror("error connection");
+			free(clientfd);
 			continue;
 		}
-		
-		char client_ip[INET_ADDRSTRLEN];
-		if (inet_ntop(AF_INET, &client_addr.sin_addr, client_ip, sizeof(client_ip)) == NULL) {
-			perror("inet_ntop");
-			close(sockfd);
-			exit(EXIT_FAILURE);
-		}
-		printf("Connected: %s\n", client_ip);
-		
-		const char *response = "Hi from server";
-		send(clientfd, response, strlen(response), 0);
-		close(clientfd);
+		create_thread(clientfd);
  	}
 
-    sqlite3 *db = NULL;
-    if(open_database("database/Uchat.db", db) == -1) return -1;
-
-
-
-    sqlite3_close(db);
- 	close(sockfd);
-    return 0;
+	sqlite3_close(db);
+	close(sockfd);
+	return 0;
 }

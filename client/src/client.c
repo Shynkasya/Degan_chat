@@ -22,30 +22,25 @@ int main(int argc, char* argv[]) {
 
    	client_addr.sin_family = AF_INET;
 	client_addr.sin_port = htons(SERVER_PORT);
-	client_addr.sin_addr.s_addr = inet_addr(argv[1]);
-	//
-	char buffer[256];
+	//client_addr.sin_addr.s_addr = inet_addr(argv[1]);
+	inet_pton(AF_INET, argv[1], &client_addr.sin_addr.s_addr);
+	//bzero(&remote_server.sin_zero , 0);
 	
-	//
+	//char buffer[256];
+	
+	
 	if (connect(sockfd, (struct sockaddr *)&client_addr, sizeof(client_addr)) == -1) {
 		perror("Connection failed");
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
 	
-	
-	int nread = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
-	if (nread < 0) {
-		perror("recv error");
-	} else {
-		buffer[nread] = '\0';
-		printf("My IP is %s\tmessage from server : %s\n", argv[1], buffer);
-	}
+
 	
 
     char *msg = "Hello from client!";
-    printf("Connection established!\n");
     send(sockfd, msg, strlen(msg), 0);
+    printf("Connection established!\n");
     close(sockfd);
     return 0;
 }
