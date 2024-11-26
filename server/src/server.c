@@ -1,40 +1,35 @@
 #include"../inc/server.h"
-
-int error_handler(int argc, char* argv[]){
-	if(argc != 2){
-		fprintf(stderr, "usage: ./uchat_server [network port]\n");
-		return -1;
-	}
-	int i = 0;
-	int port = 0;
-	while(argv[1][i] != '\0'){
-		port = port * 10 + argv[1][i] - '0';
-		i++;
-	}
-	return port;
-}
+#include <arpa/inet.h> //для inet_ntop()  и INET_ADDRSTRLEN
 
 int main(int argc, char* argv[]) {
-	int port = error_handler(argc, argv);
-	if(port == -1) return -1;
-	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in address = {0};
+	int port = port_checker(argc, argv);
+	int sockfd = Socket(AF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in address = {0}; //server address
 	address.sin_port = htons(port);
 	address.sin_family = AF_INET;
-	if(bind(sockfd, (struct sockaddr*)&address, sizeof(address)) == -1){
-		printf("Binding isn't succesfull\n");
-		close(sockfd);
-		return -1;
-	}
-	if(listen(sockfd, 5) < 0){
-		printf("Listen isn't succesfull\n");
-		close(sockfd);
-		return -1;
-	}
-	int* client;
-	while(1){
-		client = malloc(sizeof(int));
-		*client = accept(sockfd, NULL, NULL);
+	Bind(sockfd, (struct sockaddr*)&address, sizeof(address));
+	Listen(sockfd, 5);
+	int clientfd;
+	struct sockaddr_in client_addr;
+	socklen_t addr_len = sizeof(client_addr); 
+	while(1) {
+		clientfd = accept(sockfd, (struct sockaddr *)&client_addr, &addr_len);
+		if (clientfd < 0) {
+			perror("error connection");
+			continue;
+		}
+		
+		char client_ip[INET_ADDRSTRLEN];
+		if (inet_ntop(AF_INET, &client_addr.sin_addr, client_ip, sizeof(client_ip)) == NULL) {
+			perror("inet_ntop");
+			close(sockfd);
+			exit(EXIT_FAILURE);
+		}
+		printf("Connected: %s\n", client_ip);
+		
+		const char *response = "Hi from server";
+		send(clientfd, response, strlen(response), 0);
+		close(clientfd);
  	}
 
     sqlite3 *db = NULL;
