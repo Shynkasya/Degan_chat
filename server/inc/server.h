@@ -10,6 +10,7 @@
 #include <string.h>
 #include <errno.h>
 #include <stddef.h>
+#include <signal.h>
 
 typedef struct Registration {
   char *name;
@@ -17,9 +18,13 @@ typedef struct Registration {
   char *password_hash;
 } Reg;
 
+void DaemonServer(int port);
+void signal_handler(int sig);
+
 int open_database(const char* name, sqlite3 *db);
 
 //connection.c
+int _connection(int argc, char *argv[]);
 int Socket(int domain, int type, int protocol);
 int port_checker(int argc, char* argv[]);
 void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);

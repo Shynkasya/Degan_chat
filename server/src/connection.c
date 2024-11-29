@@ -36,3 +36,15 @@ void Listen(int sockfd, int backlog) {
 	}
 }
 
+int _connection(int argc, char *argv[]) {
+	int port = port_checker(argc, argv);
+	int sockfd = Socket(AF_INET, SOCK_STREAM, 0);
+	struct sockaddr_in address = {0}; //server address
+	address.sin_port = htons(port);
+	address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+	Bind(sockfd, (struct sockaddr*)&address, sizeof(address));
+	Listen(sockfd, 5);
+    return sockfd;
+}
+
