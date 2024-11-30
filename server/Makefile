@@ -1,7 +1,7 @@
 NAME = uchat_server
 CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -I../libraries/sqlite3
-LIBS = ../libraries/sqlite3/libsqlite3.a
+LIBS = ../libraries/sqlite3/libsqlite3.a -lpthread -ldl
 #LIBS = libsqlite3.a
 .PHONY: all clean uninstall reinstall
 all: $(NAME)
