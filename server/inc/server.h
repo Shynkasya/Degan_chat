@@ -11,6 +11,7 @@
 #include <errno.h>
 #include <stddef.h>
 #include <signal.h>
+#include <pthread.h>
 
 typedef struct Registration {
   char *name;
@@ -18,8 +19,7 @@ typedef struct Registration {
   char *password_hash;
 } Reg;
 
-void DaemonServer(int port);
-void signal_handler(int sig);
+void DaemonServer(int argc, char* argv[]);
 
 int open_database(const char* name, sqlite3 *db);
 

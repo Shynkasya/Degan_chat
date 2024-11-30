@@ -11,10 +11,10 @@ reinstall:
 	$(MAKE) -C libraries/sqlite3 reinstall
 	$(MAKE) -C server reinstall
 	$(MAKE) -C client reinstall
-	@echo "All reintalled"
+	@echo "All reinstalled"
 
 uninstall:
 	$(MAKE) -C libraries/sqlite3 uninstall
 	$(MAKE) -C server uninstall
 	$(MAKE) -C client uninstall
-	@echo "All unintalled"
+	@echo "All uninstalled"

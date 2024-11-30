@@ -1,10 +1,10 @@
-2#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
 
-#define SERVER_PORT 2000
+//#define SERVER_PORT 2000
 
 
 int main(int argc, char* argv[]) {
@@ -21,10 +21,10 @@ int main(int argc, char* argv[]) {
     	}
 
    	client_addr.sin_family = AF_INET;
-	client_addr.sin_port = htons(SERVER_PORT);
+	client_addr.sin_port = htons(atoi(argv[2]));
 	client_addr.sin_addr.s_addr = inet_addr(argv[1]);
 	//
-	char buffer[256];
+	char buffer[256] = {0};
 	
 	//
 	if (connect(sockfd, (struct sockaddr *)&client_addr, sizeof(client_addr)) == -1) {
@@ -33,19 +33,20 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	
-	
 	int nread = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
 	if (nread < 0) {
 		perror("recv error");
 	} else {
 		buffer[nread] = '\0';
-		printf("My IP is %s\tmessage from server : %s\n", argv[1], buffer);
+		printf("Message from server : %s\n", buffer);
 	}
 	
 
-    char *msg = "Hello from client!";
-    printf("Connection established!\n");
-    send(sockfd, msg, strlen(msg), 0);
+    scanf("%s", buffer);
+    send(sockfd, buffer, sizeof(buffer) - 1, 0);
+
+
+    printf("Disconect\n");
     close(sockfd);
     return 0;
 }
