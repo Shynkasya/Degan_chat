@@ -1,17 +1,30 @@
-NAME = uchat
+SRC_DIR = src
+INC_DIR = inc
+OBJ_DIR = obj
+
+SRC_FILES = $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
+HDR_FILES = $(wildcard $(INC_DIR)/*.h)
+
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
+LDFLAGS = `pkg-config --libs gtk+-3.0`
 
-.PHONY: all clean uninstall reinstall
-all: $(NAME)
+TARGET = HolyChat
 
-$(NAME):
-	$(CC) $(CFLAGS) -o $(NAME) src/*.c  
+all: $(TARGET)
+
+$(TARGET): $(OBJ_FILES)
+	@$(CC) $(OBJ_FILES) -o $@ $(LDFLAGS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR_FILES)
+	@mkdir -p $(OBJ_DIR)
+	@$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
 clean:
-	rm -rf obj
+	@rm -rf $(OBJ_DIR)
 
 uninstall: clean
-	rm -rf $(NAME)
-	
-reinstall: uninstall all
+	@rm -f $(TARGET)
+
+.PHONY: all clean uninstall reinstall

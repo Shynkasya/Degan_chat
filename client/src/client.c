@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <arpa/inet.h>
+#include "client.h"
 
 #define SERVER_PORT 8000
 
@@ -10,6 +11,7 @@
 int main(int argc, char* argv[]) {
 	int sockfd;
 	struct sockaddr_in client_addr;
+	
 	if(argc != 3){
 		fprintf(stderr, "usage: ./uchat [IP adress] [network port]\n");
 		return -1;
@@ -35,12 +37,15 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	
-
-	
-
-    char *msg = "Hello from client!";
-    send(sockfd, msg, strlen(msg), 0);
-    printf("Connection established!\n");
-    close(sockfd);
+	char *msg = "Hello from client!";
+	send(sockfd, msg, strlen(msg), 0);
+	printf("Connection established!\n");
+    
+	//calling for a window initialization
+	interface_init(argc, argv);
+    
+	close(sockfd);
+    
     return 0;
 }
+
