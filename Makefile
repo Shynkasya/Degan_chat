@@ -1,3 +1,4 @@
+.PHONY: all uninstall reinstall
 all:
 	@echo "Make Libraries" 
 	$(MAKE) -C libraries/sqlite3
@@ -5,16 +6,15 @@ all:
 	$(MAKE) -C server
 	@echo "Make Client"
 	$(MAKE) -C client 
+	mv client/HolyChat ./
+	mv server/uchat_server ./
+	mv server/pidkiller ./
 	@echo "SUCCESS"
-
-reinstall:
-	$(MAKE) -C libraries/sqlite3 reinstall
-	$(MAKE) -C server reinstall
-	$(MAKE) -C client reinstall
-	@echo "All reintalled"
-
 uninstall:
 	$(MAKE) -C libraries/sqlite3 uninstall
 	$(MAKE) -C server uninstall
 	$(MAKE) -C client uninstall
-	@echo "All unintalled"
+	@echo "All uninstalled"
+
+reinstall: uninstall all
+

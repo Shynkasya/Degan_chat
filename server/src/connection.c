@@ -40,14 +40,15 @@ void initialise_adress(struct sockaddr_in *address, int port, int domain){
 	address->sin_family = domain;
 	address->sin_addr.s_addr = INADDR_ANY;
 }
-
-int connect_to_port(int argc, char* argv[]){
-		
+int connection(int argc, char *argv[]) {
 	int port = port_checker(argc, argv);
 	int sockfd = Socket(AF_INET, SOCK_STREAM, 0);
-	struct sockaddr_in address;
-	initialise_adress(&address, port, AF_INET);
+	struct sockaddr_in address = {0}; //server address
+	address.sin_port = htons(port);
+	address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
 	Bind(sockfd, (struct sockaddr*)&address, sizeof(address));
-	Listen(sockfd, 10);
-	return sockfd;
+	Listen(sockfd, 5);
+    return sockfd;
 }
+
