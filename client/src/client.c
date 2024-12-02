@@ -5,7 +5,20 @@
 #include <arpa/inet.h>
 
 //#define SERVER_PORT 2000
-
+typedef enum Operations{
+	REGISTRATION,
+	LOGIN,
+	RECONNECTION,
+	NEW_ROOM,
+	NEW_CHAT,
+	ADD_MEMBER,	
+	SEND,
+	RECIEVE, //????????????????????????????????????
+	DELETE,
+	EDIT,
+	SEARCH_MESSAGE,
+	SEARCH_CONTACT
+} request;
 
 int main(int argc, char* argv[]) {
 	int sockfd;
@@ -32,7 +45,8 @@ int main(int argc, char* argv[]) {
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
-	
+	request op = REGISTRATION;
+	send(sockfd, &op, sizeof(op), 0);
 	int nread = recv(sockfd, buffer, sizeof(buffer) - 1, 0);
 	if (nread < 0) {
 		perror("recv error");
