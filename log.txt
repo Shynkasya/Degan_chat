@@ -1,1 +1,13 @@
 ==========NEW_SESSION==========
+Client 4 connected to server
+SQL error: near ";": syntax error
+free(): invalid pointer
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+no more rows available
+Client 4 disconnected from server

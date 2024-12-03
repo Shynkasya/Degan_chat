@@ -7,7 +7,6 @@ void open_database(const char* name, sqlite3 **db){
 		sqlite3_close(*db);
 		exit(EXIT_FAILURE);
 	}
-  
 }
 void create_user_table(sqlite3** db){
 	char* err_msg = NULL;

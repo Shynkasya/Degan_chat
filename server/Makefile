@@ -8,7 +8,6 @@ LIBS = ../libraries/sqlite3/libsqlite3.a -lpthread -ldl
 all: $(NAME)
 
 $(NAME):
-	mkdir obj
 	$(CC) $(CFLAGS) $(CLIBS) -o $(NAME) src/*.c $(LIBS)  
 	$(CC) $(CFLAGS) -o pidkiller pidkiller.c
 
