@@ -1,0 +1,126 @@
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Inserted
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Inserted
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Inserted
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Inserted
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
+Login: Vlad ; password: fetewyghdfr
+login: |Vlad|
+passhash: |fetewyghdfr|
+Connection 4 closed
+Client 4 disconnected from server
+SIGTERM received
