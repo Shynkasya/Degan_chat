@@ -1,7 +1,7 @@
 .PHONY: all uninstall reinstall
 all:
-	@echo "Make Libraries" 
-	$(MAKE) -C libraries/sqlite3
+	#@echo "Make Libraries"
+	#$(MAKE) -C libraries/sqlite3
 	@echo "Make Server" 
 	$(MAKE) -C server
 	@echo "Make Client"
@@ -11,7 +11,7 @@ all:
 	mv server/pidkiller ./
 	@echo "SUCCESS"
 uninstall:
-	$(MAKE) -C libraries/sqlite3 uninstall
+	#$(MAKE) -C libraries/sqlite3 uninstall
 	$(MAKE) -C server uninstall
 	$(MAKE) -C client uninstall
 	@echo "All uninstalled"

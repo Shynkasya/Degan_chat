@@ -1,8 +1,6 @@
 #include "../inc/server.h"
 
-//#define PID_FILE "/tmp/pid_file"
-
-void signal_handler(int sig) {
+static void signal_handler(int sig) {
   if (sig == SIGTERM) {
     printf("SIGTERM received\n");
     remove(PID_FILE);

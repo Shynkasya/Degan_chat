@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <pthread.h>
+#include <jansson.h>
 
 #define DB_PATH "server/database/Uchat.db" 
 #define PID_FILE "/tmp/pid_file" //временный каталог в который записуется pid демона
@@ -54,7 +55,6 @@ typedef struct Registration {
 
 
 void daemon_server();
-void signal_handler(int sig);
 void *client_handler(void *arg);
 
 
@@ -63,13 +63,14 @@ void open_database(const char* name, sqlite3 **db);
 void create_user_table(sqlite3** db);
 
 //connection.c
-int connection(int argc, char *argv[]);
-int Socket(int domain, int type, int protocol);
-int port_checker(int argc, char* argv[]);
-void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
-void Listen(int sockfd, int backlog);
-void initialise_adress(struct sockaddr_in *address, int port, int domain);
-int connect_to_port(int argc, char* argv[]);
+int connection(int argc, char *argv[]); //return socket fd
+//int Socket(int domain, int type, int protocol);
+//int port_checker(int argc, char* argv[]);
+//void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+//void Listen(int sockfd, int backlog);
+
+//void initialise_adress(struct sockaddr_in *address, int port, int domain);
+//int connect_to_port(int argc, char* argv[]);
 
 
 

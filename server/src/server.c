@@ -4,7 +4,6 @@ pthread_mutex_t mutex;
 int main(int argc, char* argv[]) {
 	daemon_server();
 
-
 	int sockfd = connection(argc, argv);
 	pthread_mutex_init(&mutex, NULL);
 

@@ -7,26 +7,31 @@ void *client_handler(void *arg) {
 	open_database("server/database/Uchat.db", &db);
     /////////////////////////////////////////
     char *err_msg = NULL;
-    char *sql = "CREATE TABLE IF NOT EXISTS users (login TEXT, password TEXT);"
-                "INSERT INTO users (login, password) VALUES ('Vlad', '53225d');";
+    char *sql = "DROP TABLE IF EXISTS users;"
+        		"CREATE TABLE IF NOT EXISTS users (login TEXT, passhash TEXT);"
+                "INSERT INTO users (login, passhash) VALUES ('Vlad', 'fetewyghdfr');";
     int rc;
     if ((rc = sqlite3_exec(db, sql, 0, 0, &err_msg)) != SQLITE_OK) {
     	printf("SQL error: %s\n", err_msg);
         close(clientfd);
         sqlite3_close(db);
+        return NULL;
     }
     printf("users created\n");
 
-
-
-	int i = 0;
     /////////////////////////////////
-	//const char *response;
-	while(i < 1){
-          i++;
-		//recv(clientfd, &op_number, sizeof(op_number) - 1, 0);
+	while(1){
+		int nread = recv(clientfd, &op_number, sizeof(op_number), 0);
+                if (nread <= 0) {
+                	if (nread == 0) printf("Connection %d closed\n", clientfd);
+                    else perror("recv error: ");
+                    break;
+                }
+                op_number = ntohl(op_number);
+                printf("Bytes read: %d\n", nread);
+                printf("op number = %d\n", op_number);
 		pthread_mutex_lock(&mutex);
-                op_number = LOGIN;
+                //op_number = LOGIN;
 		switch(op_number){
 			case REGISTRATION:
 			  	break;
@@ -53,6 +58,9 @@ void *client_handler(void *arg) {
 		  		break;
 		  	case SEARCH_CONTACT:
 		  		break;
+            default:
+              printf("Unknown operation number: %d\n", op_number);
+              break;
 
 		  }
 		  pthread_mutex_unlock(&mutex);

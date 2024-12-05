@@ -1,5 +1,6 @@
-#include "client.h"
-
+#include "../inc/client.h"
+#include <jansson.h>
+#include <string.h>
 
 int main(int argc, char* argv[]) {
 	int sockfd;
@@ -24,13 +25,21 @@ int main(int argc, char* argv[]) {
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
-	
-	char *msg = "Hello from client!";
-	send(sockfd, msg, strlen(msg), 0);
 	printf("Connection established!\n");
-    
+    int operation = 1;
+    int network_order = htonl(operation);
+    send(sockfd, &network_order, sizeof(network_order), 0);
+    printf("Sending request...\n");
+    json_t *root = json_object();
+    json_object_set_new(root, "login", json_string("Vlad"));
+    json_object_set_new(root, "passhash", json_string("fetewyghdfr"));
+    char *json_str = json_dumps(root, JSON_COMPACT);
+    printf("%s\n", json_str);
+    printf("Sending json...\n");
+    send(sockfd, json_str, strlen(json_str), 0);
+    json_decref(root);
 	//calling for a window initialization
-	interface_init(argc, argv);
+	//interface_init(argc, argv);
     
 	printf("Disconect\n");
 	close(sockfd);

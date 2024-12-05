@@ -2,20 +2,26 @@
 //название таблицы с регистрации = users
 
 void login_request(int sockfd, sqlite3 *db) {
-    char password[64], login[64];
-    int nread = recv(sockfd, &login, sizeof(login), 0);
-    login[nread] = '\0';
-    nread = recv(sockfd, &password, sizeof(password), 0);
-    password[nread] = '\0';
+    json_t *root = NULL;
+    char buffer[1024] = {0};
+    ssize_t nread = recv(sockfd, buffer, sizeof(buffer)-1, 0);
+    buffer[nread] = '\0';
+    printf("%s\n", buffer);
+    printf("Bytes read %d\n", (int)nread);
+    json_error_t err_msg;
+    root = json_loads(buffer, 0, &err_msg);
+    const char *login = json_string_value(json_object_get(root, "login"));
+    const char *passhash = json_string_value(json_object_get(root, "passhash"));
+	printf("login: |%s|\n", login);
+    printf("passhash: |%s|\n", passhash);
 
-
-
-
-    char *sql = "SELECT 1 FROM users WHERE login = ? AND password = ?;";
+	json_decref(root);
+    char *sql = "SELECT * FROM users WHERE login = ? AND passhash = ?;";
     sqlite3_stmt *stmt = NULL;
-    sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
-    sqlite3_bind_text(stmt, 1, login, -1, SQLITE_STATIC);
-    sqlite3_bind_text(stmt, 2, password, -1, SQLITE_STATIC);
+    if (sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {printf("%s\n", sqlite3_errmsg(db));};
+    if (sqlite3_bind_text(stmt, 1, login, -1, SQLITE_STATIC) != SQLITE_OK) {printf("%s\n", sqlite3_errmsg(db));};
+    if (sqlite3_bind_text(stmt, 2, passhash, -1, SQLITE_STATIC) != SQLITE_OK) {printf("%s\n", sqlite3_errmsg(db));};
+    printf("Sql: %s\n", sqlite3_expanded_sql(stmt));
     if (sqlite3_step(stmt) != SQLITE_ROW) {
       printf("%s\n", sqlite3_errmsg(db));
       return;
