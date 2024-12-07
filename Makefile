@@ -1,5 +1,6 @@
 .PHONY: all uninstall reinstall
 all:
+
 	#@echo "Make Libraries" 
 	#$(MAKE) -C libraries/sqlite3
 	@echo "Make Server" 

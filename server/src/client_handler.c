@@ -78,15 +78,18 @@ void sent_message(int clientfd){
 void *client_handler(void *arg) {
 	int clientfd = *(int *)arg;
 	request op_number;
-
-	//const char *response;
-	//while(true){
-		recv(clientfd, &op_number, sizeof(op_number), 0);
+	while(1){
+		int nread = recv(clientfd, &op_number, sizeof(op_number), 0);
+                if (nread <= 0) {
+                	if (nread == 0) printf("Connection %d closed\n", clientfd);
+                    else perror("recv error: ");
+                    break;
+                }
 		switch(op_number){
 			case REGISTRATION:
-			
 			  	break;
-		  	case LOGIN:
+		  	case LOGIN: 
+				login_request(clientfd);
  			  	break;
 		  	case RECONNECTION:
 		  		break;
@@ -99,7 +102,7 @@ void *client_handler(void *arg) {
 		  	case SEND:
 		  		sent_message(clientfd);
 		  		break;
-		  	case RECIEVE: //????????????????????????????????????
+		  	case RECEIVE: //????????????????????????????????????
 		  		break;
 		  	case DELETE:
 		  		break;
@@ -109,12 +112,14 @@ void *client_handler(void *arg) {
 		  		break;
 		  	case SEARCH_CONTACT:
 		  		break;
-		  
+			default:
+				printf("Unknown operation number: %d\n", op_number);
+				break;
+
 		  }
 		  
-	//}
+	}
 	close(clientfd);
 	free(arg);
-	printf("Client disconnected from server\n");
 	pthread_exit(0);
 }

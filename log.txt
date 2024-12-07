@@ -1,8 +1,20 @@
 ==========NEW_SESSION==========
-Получено сообщение: user_id=1, chat_id=30976, text=����y
-Ошибка выполнения запроса: database is locked
-Client disconnected from server
+SQL error: database is locked
 ==========NEW_SESSION==========
-Message: user_id=1, chat_id=30464, text=���{5w
-Ошибка выполнения запроса: database is locked
-Client disconnected from server
+SQL error5: database is locked
+==========NEW_SESSION==========
+Client 4 connected to server
+Unknown operation number: 16777216
+Unknown operation number: 1869357691
+Unknown operation number: 577661287
+Unknown operation number: 1817584186
+Unknown operation number: 740451425
+Unknown operation number: 1935765538
+Unknown operation number: 1935763571
+Unknown operation number: 574235240
+Unknown operation number: 1702126950
+Unknown operation number: 1751611767
+Unknown operation number: 577922660
+Unknown operation number: 577922685
+Connection 4 closed
+SIGTERM received

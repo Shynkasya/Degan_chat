@@ -14,10 +14,14 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <pthread.h>
+#include "../../libraries/jansson/jansson.h"
 
-
+#define DB_PATH "server/database/Uchat.db" 
 #define PID_FILE "/tmp/pid_file" //временный каталог в который записуется pid демона
 #define DATABASE "server/database/Uchat.db"
+
+
+extern pid_t pid;
 
 typedef enum Operations{
 	REGISTRATION,
@@ -27,12 +31,15 @@ typedef enum Operations{
 	NEW_CHAT,
 	ADD_MEMBER,	
 	SEND,
-	RECIEVE, //????????????????????????????????????
+	RECEIVE, //????????????????????????????????????
 	DELETE,
 	EDIT,
 	SEARCH_MESSAGE,
 	SEARCH_CONTACT
 } request;
+//Functions for Operations(requests)
+void login_request(int sockfd);
+
 
 typedef struct Registration {
   char *name;
@@ -42,7 +49,6 @@ typedef struct Registration {
 
 
 void daemon_server();
-void signal_handler(int sig);
 void *client_handler(void *arg);
 
 
@@ -53,16 +59,10 @@ void create_chat_table(sqlite3** db);
 void create_member_table(sqlite3** db);
 void create_messages_table(sqlite3** db);
 void create_file_descriptor_table(sqlite3** db);
+void database_init();
 
 //connection.c
-int connection(int argc, char *argv[]);
-int Socket(int domain, int type, int protocol);
-int port_checker(int argc, char* argv[]);
-void Bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
-void Listen(int sockfd, int backlog);
-void initialise_adress(struct sockaddr_in *address, int port, int domain);
-int connect_to_port(int argc, char* argv[]);
-
+int connection(int argc, char *argv[]); //return socket fd
 
 
 

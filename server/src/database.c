@@ -7,7 +7,6 @@ void open_database(const char* name, sqlite3 **db){
 		sqlite3_close(*db);
 		exit(EXIT_FAILURE);
 	}
-  
 }
 void create_user_table(sqlite3** db){
 	char* err_msg = NULL;
@@ -71,5 +70,21 @@ void create_file_descriptor_table(sqlite3** db){
 		exit(EXIT_FAILURE);
 	}
 	//free(sql);
+}
+
+
+void database_init(){
+	if (sqlite3_config(SQLITE_CONFIG_SERIALIZED) != SQLITE_OK) {
+		fprintf(stderr, "SQLite does not support serialized mode.\n");
+		exit(1);
+	}
+	sqlite3* db;
+	open_database("server/database/Uchat.db", &db);
+	create_user_table(&db);
+	create_chat_table(&db);
+	create_member_table(&db);
+	create_messages_table(&db);
+	//create_file_descriptor_table(&db);
+	sqlite3_close(db);
 }
 

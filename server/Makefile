@@ -1,14 +1,13 @@
 NAME = uchat_server
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -g
 CLIBS = -I../libraries/sqlite3
-LIBS = ../libraries/sqlite3/libsqlite3.a -lpthread -ldl
+LIBS = ../libraries/sqlite3/libsqlite3.a -lpthread -ldl ../libraries/jansson/libjansson.a
 #LIBS = libsqlite3.a
 .PHONY: all clean uninstall reinstall
 all: $(NAME)
 
 $(NAME):
-	mkdir obj
 	$(CC) $(CFLAGS) $(CLIBS) -o $(NAME) src/*.c $(LIBS)  
 	$(CC) $(CFLAGS) -o pidkiller pidkiller.c
 
