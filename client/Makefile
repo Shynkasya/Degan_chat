@@ -10,7 +10,7 @@ CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
 LDFLAGS = `pkg-config --libs gtk+-3.0`
 
-TARGET = HolyChat
+TARGET = uchat
 
 all: $(TARGET)
 
