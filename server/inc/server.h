@@ -20,6 +20,7 @@
 #define PID_FILE "/tmp/pid_file" //временный каталог в который записуется pid демона
 
 extern pthread_mutex_t mutex;
+extern pid_t pid;
 
 typedef enum Operations{
 	REGISTRATION,

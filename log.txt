@@ -5,15 +5,56 @@ Bytes read: 4
 op number = 1
 {"login":"Vlad","passhash":"fetewyghdfr"}
 Bytes read 41
-Inserted
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
-Connection 4 closed
-Client 4 disconnected from server
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+SIGTERM received
+==========NEW_SESSION==========
+==========NEW_SESSION==========
+bind error: Address already in use
+==========NEW_SESSION==========
+bind error: Address already in use
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+==========NEW_SESSION==========
+bind error: Address already in use
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+==========NEW_SESSION==========
+bind error: Address already in use
+SIGTERM received
+==========NEW_SESSION==========
+==========NEW_SESSION==========
+bind error: Address already in use
 SIGTERM received
 ==========NEW_SESSION==========
 Client 4 connected to server
@@ -22,13 +63,7 @@ Bytes read: 4
 op number = 1
 {"login":"Vlad","passhash":"fetewyghdfr"}
 Bytes read 41
-Inserted
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
-Connection 4 closed
-Client 4 disconnected from server
+==========NEW_SESSION==========
 SIGTERM received
 ==========NEW_SESSION==========
 Client 4 connected to server
@@ -37,13 +72,112 @@ Bytes read: 4
 op number = 1
 {"login":"Vlad","passhash":"fetewyghdfr"}
 Bytes read 41
-Inserted
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+Point
+==========NEW_SESSION==========
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
 Connection 4 closed
-Client 4 disconnected from server
+==========NEW_SESSION==========
+bind error: Address already in use
+Client 5 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 5 closed
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 4 closed
+Client 5 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 5 closed
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 4 closed
+Client 5 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 5 closed
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 4 closed
+Client 5 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 5 closed
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 4 closed
+Client 5 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 5 closed
+Client 4 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Connection 4 closed
 SIGTERM received
 ==========NEW_SESSION==========
 Client 4 connected to server
@@ -52,75 +186,32 @@ Bytes read: 4
 op number = 1
 {"login":"Vlad","passhash":"fetewyghdfr"}
 Bytes read 41
-Inserted
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Client 5 connected to server
+SQL error: database is locked
 Connection 4 closed
-Client 4 disconnected from server
-SIGTERM received
+Client 7 connected to server
+users created
+Bytes read: 4
+op number = 1
+{"login":"Vlad","passhash":"fetewyghdfr"}
+Bytes read 41
+FOUND-> Login: Vlad ; password: fetewyghdfr
 ==========NEW_SESSION==========
+bind error: Address already in use
+Client 4 connected to server
+SQL error: database is locked
+Client 6 connected to server
+SQL error: database is locked
+Connection 7 closed
 Client 4 connected to server
 users created
 Bytes read: 4
 op number = 1
 {"login":"Vlad","passhash":"fetewyghdfr"}
 Bytes read 41
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
+FOUND-> Login: Vlad ; password: fetewyghdfr
+Client 5 connected to server
+SQL error: database is locked
 Connection 4 closed
-Client 4 disconnected from server
-SIGTERM received
-==========NEW_SESSION==========
-Client 4 connected to server
-users created
-Bytes read: 4
-op number = 1
-{"login":"Vlad","passhash":"fetewyghdfr"}
-Bytes read 41
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
-Connection 4 closed
-Client 4 disconnected from server
-SIGTERM received
-==========NEW_SESSION==========
-Client 4 connected to server
-users created
-Bytes read: 4
-op number = 1
-{"login":"Vlad","passhash":"fetewyghdfr"}
-Bytes read 41
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
-Connection 4 closed
-Client 4 disconnected from server
-SIGTERM received
-==========NEW_SESSION==========
-Client 4 connected to server
-users created
-Bytes read: 4
-op number = 1
-{"login":"Vlad","passhash":"fetewyghdfr"}
-Bytes read 41
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-Sql: SELECT * FROM users WHERE login = 'Vlad' AND passhash = 'fetewyghdfr';
-Login: Vlad ; password: fetewyghdfr
-login: |Vlad|
-passhash: |fetewyghdfr|
-Connection 4 closed
-Client 4 disconnected from server
 SIGTERM received

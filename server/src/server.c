@@ -1,10 +1,18 @@
 #include"../inc/server.h"
 pthread_mutex_t mutex;
+pid_t pid;
 
 int main(int argc, char* argv[]) {
 	daemon_server();
 
 	int sockfd = connection(argc, argv);
+	FILE *pid_file = fopen(PID_FILE, "w");
+	if (!pid_file) {
+		perror("fopen");
+		exit(1);
+	}
+	fprintf(pid_file, "%d\n", getpid());
+	fclose(pid_file);
 	pthread_mutex_init(&mutex, NULL);
 
 	while(1) {

@@ -31,7 +31,6 @@ void *client_handler(void *arg) {
                 printf("Bytes read: %d\n", nread);
                 printf("op number = %d\n", op_number);
 		pthread_mutex_lock(&mutex);
-                //op_number = LOGIN;
 		switch(op_number){
 			case REGISTRATION:
 			  	break;
@@ -68,7 +67,6 @@ void *client_handler(void *arg) {
 	}
 	close(clientfd);
 	free(arg);
-	printf("Client %d disconnected from server\n", clientfd);
 	sqlite3_close(db);
 	pthread_exit(0);
 }
