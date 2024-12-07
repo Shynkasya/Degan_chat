@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <gtk/gtk.h>
+#include <stdbool.h>
 
 
 typedef enum Operations{
