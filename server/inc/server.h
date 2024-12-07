@@ -17,6 +17,7 @@
 
 
 #define PID_FILE "/tmp/pid_file" //временный каталог в который записуется pid демона
+#define DATABASE "server/database/Uchat.db"
 
 typedef enum Operations{
 	REGISTRATION,
@@ -33,14 +34,6 @@ typedef enum Operations{
 	SEARCH_CONTACT
 } request;
 
-
-typedef struct Message{
-	int id;
-	char*name;
-	//need to add time
-	char* text;
-} Mess;
-
 typedef struct Registration {
   char *name;
   char *email;
@@ -56,6 +49,10 @@ void *client_handler(void *arg);
 //Database
 void open_database(const char* name, sqlite3 **db);
 void create_user_table(sqlite3** db);
+void create_chat_table(sqlite3** db);
+void create_member_table(sqlite3** db);
+void create_messages_table(sqlite3** db);
+void create_file_descriptor_table(sqlite3** db);
 
 //connection.c
 int connection(int argc, char *argv[]);

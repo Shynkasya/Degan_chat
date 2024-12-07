@@ -11,7 +11,7 @@ void open_database(const char* name, sqlite3 **db){
 }
 void create_user_table(sqlite3** db){
 	char* err_msg = NULL;
-	char *sql = "CREATE TABLE IF NOT EXISTS User (Id INTEGER PRIMARY KEY, Username TEXT, Password_Hash TEXT, Email TEXT);";
+	char *sql = "CREATE TABLE IF NOT EXISTS User (Id INTEGER PRIMARY KEY AUTOINCREMENT, Username TEXT, Password_Hash TEXT, Email TEXT);";
 	int rc = sqlite3_exec(*db, sql, 0, 0, &err_msg);
 	if (rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", err_msg);
@@ -21,3 +21,55 @@ void create_user_table(sqlite3** db){
 	}
 	//free(sql);
 }
+void create_chat_table(sqlite3** db){
+	char* err_msg = NULL;
+	char *sql = "CREATE TABLE IF NOT EXISTS Chat (CHAT_ID INTEGER PRIMARY KEY, CHAT_NAME TEXT);";
+	int rc = sqlite3_exec(*db, sql, 0, 0, &err_msg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+		sqlite3_free(err_msg);
+		sqlite3_close(*db);
+		exit(EXIT_FAILURE);
+	}
+	//free(sql);
+}
+void create_member_table(sqlite3** db){
+	char* err_msg = NULL;
+	char *sql = "CREATE TABLE IF NOT EXISTS Member (Id INTEGER PRIMARY KEY AUTOINCREMENT, CHAT_ID INTEGER, USER_ID INTEGER, FOREIGN KEY (CHAT_ID) REFERENCES Chat(CHAT_ID), FOREIGN KEY (USER_ID) REFERENCES User(Id))";
+	int rc = sqlite3_exec(*db, sql, 0, 0, &err_msg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+		sqlite3_free(err_msg);
+		sqlite3_close(*db);
+		exit(EXIT_FAILURE);
+	}
+	//free(sql);
+}
+void create_messages_table(sqlite3** db){
+	char* err_msg = NULL;
+	char *sql = "CREATE TABLE IF NOT EXISTS Messages (Id INTEGER PRIMARY KEY AUTOINCREMENT, CHAT_ID INTEGER, USER_ID INTEGER, MESSAGE_CONTENT BLOB, DATE INTEGER, FOREIGN KEY (CHAT_ID) REFERENCES Chat(CHATS_ID), FOREIGN KEY (USER_ID) REFERENCES User(Id))";
+	int rc = sqlite3_exec(*db, sql, 0, 0, &err_msg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+		sqlite3_free(err_msg);
+		sqlite3_close(*db);
+		exit(EXIT_FAILURE);
+	}
+	//free(sql);
+}
+
+
+
+void create_file_descriptor_table(sqlite3** db){
+	char* err_msg = NULL;
+	char *sql = "CREATE TABLE IF NOT EXISTS fd_table(USER_ID INTEGER PRIMARY KEY, SOCKET_FD INTEGER); DELETE FROM fd_table; VACUUM";
+	int rc = sqlite3_exec(*db, sql, 0, 0, &err_msg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", err_msg);
+		sqlite3_free(err_msg);
+		sqlite3_close(*db);
+		exit(EXIT_FAILURE);
+	}
+	//free(sql);
+}
+

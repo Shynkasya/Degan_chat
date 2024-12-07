@@ -25,7 +25,6 @@ typedef enum Operations{
 
 
 
-
 GtkWidget *create_header();
 GtkWidget *create_chat_interface(GtkWidget *stack);
 GtkWidget *create_login_interface(GtkWidget *stack);

@@ -1,1 +1,8 @@
 ==========NEW_SESSION==========
+Получено сообщение: user_id=1, chat_id=30976, text=����y
+Ошибка выполнения запроса: database is locked
+Client disconnected from server
+==========NEW_SESSION==========
+Message: user_id=1, chat_id=30464, text=���{5w
+Ошибка выполнения запроса: database is locked
+Client disconnected from server

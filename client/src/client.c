@@ -25,14 +25,26 @@ int main(int argc, char* argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	
-	char *msg = "Hello from client!";
-	send(sockfd, msg, strlen(msg), 0);
+	request op;
+	op = SEND;
+	send(sockfd, &op, sizeof(op), 0);
+	int chat_id = 4;
+	send(sockfd, &chat_id, sizeof(chat_id), 0);
+	int user_id = 42;
+	send(sockfd, &user_id, sizeof(user_id), 0);
+	char text[1024];
+	strcpy(text, "Some string");
+	send(sockfd, text, sizeof(text), 0);
+	
+	
+	
+	  
 	printf("Connection established!\n");
     
 	//calling for a window initialization
-	interface_init(argc, argv);
+	//interface_init(argc, argv);
     
-	printf("Disconect\n");
+	//printf("Disconect\n");
 	close(sockfd);
     return 0;
 }
