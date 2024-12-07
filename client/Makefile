@@ -7,8 +7,8 @@ OBJ_FILES = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_FILES))
 HDR_FILES = $(wildcard $(INC_DIR)/*.h)
 
 CC = clang
-CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
-LDFLAGS = `pkg-config --libs gtk+-3.0`  ../libraries/jansson/libjansson.a
+CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0 jansson`
+LDFLAGS = `pkg-config --libs gtk+-3.0 jansson` -lssl -lcrypto
 
 TARGET = uchat
 

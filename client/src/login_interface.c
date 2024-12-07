@@ -1,12 +1,41 @@
 #include "client.h"
 
-//function to switch to the chat screen after pressing the log in/sign in button
+void on_login_button_clicked(GtkButton *button, gpointer user_data) {
+	(void)button;
+	t_login_data *data = (t_login_data *)user_data;
+
+	//extract fields
+	const char *username = gtk_entry_get_text(GTK_ENTRY(data->username_entry));
+	const char *password = gtk_entry_get_text(GTK_ENTRY(data->password_entry));
+        
+	//hashing passwoed
+	char *hashed_password = hash_password(password);
+
+	//calling login function and receiving response
+	printf("Sending login request...\n");
+	login(data->sockfd, username, hashed_password);
+	receive_response(data->sockfd);
+}
+
+//function to switch to the chat screen after pressing the log in button
 void switch_to_chat(GtkButton *button, gpointer stack) {
 	(void)button;
 	gtk_stack_set_visible_child_name(GTK_STACK(stack), "chat");
 }
 
-GtkWidget *create_login_interface(GtkWidget *stack) {
+//function to switch to the sign in screen
+void switch_to_sign_in(GtkButton *button, gpointer stack) {
+	(void)button;
+	gtk_stack_set_visible_child_name(GTK_STACK(stack), "sign_in");
+}
+
+//function to switch to login screen
+void switch_to_login(GtkButton *button, gpointer stack) {
+	(void)button;
+	gtk_stack_set_visible_child_name(GTK_STACK(stack), "login");
+}
+
+GtkWidget *create_login_interface(GtkWidget *stack, int sockfd) {
 	//creating basic layout
 	GtkWidget *grid = gtk_grid_new();
 	gtk_grid_set_row_spacing(GTK_GRID(grid), 1);
@@ -88,8 +117,45 @@ GtkWidget *create_login_interface(GtkWidget *stack) {
 	gtk_widget_set_size_request(password_entry, 300, -1);
 
 	//adding login button
-	GtkWidget *login_button = gtk_button_new_with_label("Login");
+	GtkWidget *login_button = gtk_button_new_with_label("Log in");
+	apply_css(login_button, "button { "
+          "  background-color: #007bff; "
+          "  color: #ffffff; "
+          "  font-weight: bold; "
+          "  border-radius: 5px; "
+          "}"
+          "button:hover { "
+          "  background-color: #0056b3; "
+          "}");
 	
+	//adding sign-in button and label
+	GtkWidget *signin_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 5);
+	gtk_widget_set_halign(signin_box, GTK_ALIGN_END);
+	gtk_widget_set_valign(signin_box, GTK_ALIGN_END);
+	gtk_widget_set_margin_end(signin_box, 20);
+	gtk_widget_set_margin_bottom(signin_box, 20);
+
+	GtkWidget *signin_label = gtk_label_new("Not a part of our commune yet?");
+	apply_css(signin_label, "label { color: #0F1B2E; font-weight: bold; }");
+
+	GtkWidget *signin_button = gtk_button_new_with_label("Sign in");
+	apply_css(signin_button, 
+			"button { "
+		"  background: none; "
+		"  border: none; "
+		"  color: #0056b3; "
+		"  font-weight: bold; "
+		"} "
+		"button:hover { "
+		"  text-decoration: underline; "
+		"}");
+	gtk_widget_set_halign(signin_button, GTK_ALIGN_START);
+
+	gtk_box_pack_start(GTK_BOX(signin_box), signin_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(signin_box), signin_button, FALSE, FALSE, 5);
+
+	gtk_box_pack_end(GTK_BOX(content), signin_box, FALSE, FALSE, 0);
+
 	//adding everything to the form_box
 	gtk_box_pack_start(GTK_BOX(form_box), username_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(form_box), username_entry, FALSE, FALSE, 5);
@@ -98,11 +164,18 @@ GtkWidget *create_login_interface(GtkWidget *stack) {
 	gtk_box_pack_start(GTK_BOX(form_box), login_button, FALSE, FALSE, 10);
 
 	//adding image_box and form_box to devide the center box in half
-	gtk_box_pack_start(GTK_BOX(center_box), image_box, TRUE, TRUE, 10); // Left half
-	gtk_box_pack_start(GTK_BOX(center_box), form_box, TRUE, TRUE, 10); // Right half
+	gtk_box_pack_start(GTK_BOX(center_box), image_box, TRUE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(center_box), form_box, TRUE, TRUE, 10);
+        
+        //save login data to the structure
+	t_login_data *login_data = g_malloc(sizeof(t_login_data));
+	login_data->sockfd = sockfd;
+	login_data->username_entry = username_entry;
+	login_data->password_entry = password_entry;
 
-	//connect login button to the screen switch
-	g_signal_connect(login_button, "clicked", G_CALLBACK(switch_to_chat), stack);
+	//connect buttons
+	g_signal_connect(login_button, "clicked", G_CALLBACK(on_login_button_clicked), login_data);
+	g_signal_connect(signin_button, "clicked", G_CALLBACK(switch_to_sign_in), stack);
 
 	return grid;
 }

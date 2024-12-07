@@ -1,8 +1,9 @@
 #include "client.h"
 
-int interface_init(int argc, char *argv[]) {
+int interface_init(int sockfd) {
+(void)sockfd;
 	// Инициализация GTK
-	gtk_init(&argc, &argv);
+	gtk_init(NULL, NULL);
 
 	// Создание окна
 	GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -21,8 +22,12 @@ int interface_init(int argc, char *argv[]) {
 	gtk_container_add(GTK_CONTAINER(window), stack);
 
  	//creating and adding Login Interface to the Stack
-	GtkWidget *login_screen = create_login_interface(stack);
+	GtkWidget *login_screen = create_login_interface(stack, sockfd);
 	gtk_stack_add_named(GTK_STACK(stack), login_screen, "login");
+	
+	//creating and adding Sign In Interface to the Stack
+	GtkWidget *sign_in_screen = create_sign_in_interface(stack);
+	gtk_stack_add_named(GTK_STACK(stack), sign_in_screen, "sign_in");
 
 	//creating and adding Chat Interface to the Stack
 	GtkWidget *chat_screen = create_chat_interface(stack);

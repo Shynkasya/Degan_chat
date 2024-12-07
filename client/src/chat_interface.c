@@ -27,7 +27,7 @@ GtkWidget *create_chat_interface(GtkWidget *stack){
 	apply_css(main_area, "* { background-color: #E9E4D1; }");
 	apply_css(main_area, 
 			"* { "
-			"background-image: url('assets/pics/light_bg1.png'); "
+			"background-image: url('client/assets/pics/light_bg1.png'); "
 			"background-size: 15% 25%; "
 			"background-repeat: no-repeat; "
 			"background-position: center; "
