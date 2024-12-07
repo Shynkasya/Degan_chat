@@ -1,11 +1,27 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-
-#include <gtk/gtk.h>
-#include <stdlib.h>
 #include <stdio.h>
-#include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <arpa/inet.h>
+#include <gtk/gtk.h>
+
+
+typedef enum Operations{
+	REGISTRATION,
+	LOGIN,
+	RECONNECTION,
+	NEW_ROOM,
+	NEW_CHAT,
+	ADD_MEMBER,	
+	SEND,
+	RECIEVE, //????????????????????????????????????
+	DELETE,
+	EDIT,
+	SEARCH_MESSAGE,
+	SEARCH_CONTACT
+} request;
 
 typedef struct s_sign_up_data {
 	GtkWidget *username;
