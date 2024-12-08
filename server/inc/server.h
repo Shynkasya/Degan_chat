@@ -39,14 +39,7 @@ typedef enum Operations{
 } request;
 //Functions for Operations(requests)
 void login_request(int sockfd);
-
-
-typedef struct Registration {
-  char *name;
-  char *email;
-  char *password_hash;
-} Reg;
-
+void create_user(int sockfd);
 
 void daemon_server();
 void *client_handler(void *arg);
@@ -66,4 +59,3 @@ int connection(int argc, char *argv[]); //return socket fd
 
 
 
-int create_user(const char *name, sqlite3 *db, Reg incoming);
