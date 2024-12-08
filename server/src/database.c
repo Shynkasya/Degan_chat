@@ -8,6 +8,7 @@ void open_database(const char* name, sqlite3 **db){
 		exit(EXIT_FAILURE);
 	}
 }
+
 void create_user_table(sqlite3** db){
 	char* err_msg = NULL;
 	char *sql = "CREATE TABLE IF NOT EXISTS User (Id INTEGER PRIMARY KEY AUTOINCREMENT, Username TEXT, Password_Hash TEXT, Email TEXT);";

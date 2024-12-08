@@ -99,7 +99,7 @@ void *client_handler(void *arg) {
                 }
 		switch(op_number){
 			case REGISTRATION:
-			
+          create_user(clientfd);			
 			  	break;
 		  	case LOGIN: 
 				login_request(clientfd);
