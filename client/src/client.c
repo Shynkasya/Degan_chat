@@ -1,6 +1,5 @@
 #include "client.h"
 
-
 int main(int argc, char* argv[]) {
 	int sockfd;
 	struct sockaddr_in client_addr;
@@ -28,11 +27,12 @@ int main(int argc, char* argv[]) {
 	char *msg = "Hello from client!";
 	send(sockfd, msg, strlen(msg), 0);
 	printf("Connection established!\n");
-    
+
 	//calling for a window initialization
-	interface_init();
+	interface_init(sockfd);
+
     
-	printf("Disconect\n");
+	//printf("Disconect\n");
 	close(sockfd);
     return 0;
 }

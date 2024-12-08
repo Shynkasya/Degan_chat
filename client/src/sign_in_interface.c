@@ -165,16 +165,16 @@ GtkWidget *create_sign_in_interface(GtkWidget *stack) {
 }
 
 void on_signup_button_clicked(GtkButton *button, gpointer user_data) {
-    (void)button;
+	(void)button;
 
-    //extract user data
-    t_sign_up_data *data = (t_sign_up_data *)user_data;
+	//extract user data
+	t_sign_up_data *data = (t_sign_up_data *)user_data;
 
-    //free memory
-    g_free(data->username);
-    g_free(data->email);
-    g_free(data->password);
-    g_free(data->password_repeat);
-    g_free(data);
+	//free memory
+	g_free(data->username);
+	g_free(data->email);
+	g_free(data->password);
+	g_free(data->password_repeat);
+	g_free(data);
 }
 

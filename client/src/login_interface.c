@@ -1,5 +1,22 @@
 #include "client.h"
 
+void on_login_button_clicked(GtkButton *button, gpointer user_data) {
+	(void)button;
+	t_login_data *data = (t_login_data *)user_data;
+
+	//extract fields
+	const char *username = gtk_entry_get_text(GTK_ENTRY(data->username_entry));
+	const char *password = gtk_entry_get_text(GTK_ENTRY(data->password_entry));
+        
+	//hashing passwoed
+	char *hashed_password = hash_password(password);
+
+	//calling login function and receiving response
+	printf("Sending login request...\n");
+	login(data->sockfd, username, hashed_password);
+	receive_response(data->sockfd);
+}
+
 //function to switch to the chat screen after pressing the log in button
 void switch_to_chat(GtkButton *button, gpointer stack) {
 	(void)button;
@@ -18,7 +35,8 @@ void switch_to_login(GtkButton *button, gpointer stack) {
 	gtk_stack_set_visible_child_name(GTK_STACK(stack), "login");
 }
 
-GtkWidget *create_login_interface(GtkWidget *stack) {
+
+GtkWidget *create_login_interface(GtkWidget *stack, int sockfd) {
 	//creating basic layout
 	GtkWidget *grid = gtk_grid_new();
 	gtk_grid_set_row_spacing(GTK_GRID(grid), 1);
@@ -82,13 +100,13 @@ GtkWidget *create_login_interface(GtkWidget *stack) {
 	gtk_widget_set_halign(form_box, GTK_ALIGN_CENTER);
 	gtk_widget_set_valign(form_box, GTK_ALIGN_CENTER);
 
-	//adding "Mail:" label
-	GtkWidget *mail_label = gtk_label_new("E-mail address:");
-	apply_css(mail_label, "label { color: #0F1B2E; font-weight: bold; }");
+	//adding "Username:" label
+	GtkWidget *username_label = gtk_label_new("Username:");
+	apply_css(username_label, "label { color: #0F1B2E; font-weight: bold; }");
 
 	//adding text field for the username
-	GtkWidget *mail_entry = gtk_entry_new();
-	gtk_widget_set_size_request(mail_entry, 300, -1);
+	GtkWidget *username_entry = gtk_entry_new();
+	gtk_widget_set_size_request(username_entry, 300, -1);
 
 	//adding "Password:" label
 	GtkWidget *password_label = gtk_label_new("Password:");
@@ -140,18 +158,24 @@ GtkWidget *create_login_interface(GtkWidget *stack) {
 	gtk_box_pack_end(GTK_BOX(content), signin_box, FALSE, FALSE, 0);
 
 	//adding everything to the form_box
-	gtk_box_pack_start(GTK_BOX(form_box), mail_label, FALSE, FALSE, 5);
-	gtk_box_pack_start(GTK_BOX(form_box), mail_entry, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(form_box), username_label, FALSE, FALSE, 5);
+	gtk_box_pack_start(GTK_BOX(form_box), username_entry, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(form_box), password_label, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(form_box), password_entry, FALSE, FALSE, 5);
 	gtk_box_pack_start(GTK_BOX(form_box), login_button, FALSE, FALSE, 10);
 
 	//adding image_box and form_box to devide the center box in half
-	gtk_box_pack_start(GTK_BOX(center_box), image_box, TRUE, TRUE, 10); // Left half
-	gtk_box_pack_start(GTK_BOX(center_box), form_box, TRUE, TRUE, 10); // Right half
+	gtk_box_pack_start(GTK_BOX(center_box), image_box, TRUE, TRUE, 10);
+	gtk_box_pack_start(GTK_BOX(center_box), form_box, TRUE, TRUE, 10);
+        
+        //save login data to the structure
+	t_login_data *login_data = g_malloc(sizeof(t_login_data));
+	login_data->sockfd = sockfd;
+	login_data->username_entry = username_entry;
+	login_data->password_entry = password_entry;
 
-	//connect login button to the screen switch
-	g_signal_connect(login_button, "clicked", G_CALLBACK(switch_to_chat), stack);
+	//connect buttons
+	g_signal_connect(login_button, "clicked", G_CALLBACK(on_login_button_clicked), login_data);
 	g_signal_connect(signin_button, "clicked", G_CALLBACK(switch_to_sign_in), stack);
 
 	return grid;

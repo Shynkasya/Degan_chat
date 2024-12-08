@@ -74,7 +74,15 @@ void validate_sign_up(GtkButton *button, gpointer user_data) {
 
 	//go back to login screen if everything is valid
 	if (valid) {
-		g_print("Sign-up data is valid. Proceed to send to server.\n");
+		printf("Sign-up data is valid. Sending to server...\n");
+		
+		//hashing password
+		char *hashed_password = hash_password(password);
+		
+		//calling the register function and getting the response from server
+		register_user(data->sockfd, username, email, hashed_password);
+		receive_response(data->sockfd);
+		//go to the login screen
 		gtk_stack_set_visible_child_name(GTK_STACK(data->stack), "login");
 	}
 }

@@ -1,4 +1,0 @@
-==========NEW_SESSION==========
-==========NEW_SESSION==========
-==========NEW_SESSION==========
-usage: ./uchat_server [network port]

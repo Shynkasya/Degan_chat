@@ -19,11 +19,13 @@ void send_message(GtkButton *button, gpointer user_data) {
         int chat_index = GPOINTER_TO_INT(g_object_get_data(G_OBJECT(entry), "chat_index"));
         t_chat *chat = &chats[chat_index];
 
+
         // Додаємо нове повідомлення
         t_message *new_message = &chat->messages[chat->message_count++];
         new_message->user_id = 1;  // У цьому випадку ID користувача = 1
         strncpy(new_message->text, message, sizeof(new_message->text));
         get_current_time(new_message->timestamp, sizeof(new_message->timestamp));
+
 
         // Вставляємо повідомлення у буфер
         GtkTextIter end;

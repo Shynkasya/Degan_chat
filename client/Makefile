@@ -8,7 +8,7 @@ HDR_FILES = $(wildcard $(INC_DIR)/*.h)
 
 CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic `pkg-config --cflags gtk+-3.0`
-LDFLAGS = `pkg-config --libs gtk+-3.0`
+LDFLAGS = `pkg-config --libs gtk+-3.0` ../libraries/jansson/libjansson.a ../libraries/libssl/libssl.a ../libraries/libssl/libcrypto.a # -lssl -lcrypto
 
 TARGET = uchat
 
