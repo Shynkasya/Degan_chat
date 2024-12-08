@@ -1,7 +1,7 @@
 #include"../inc/server.h"
 
 int main(int argc, char* argv[]) {
-	daemon_server();
+//	daemon_server();
 
 
 	int sockfd = connection(argc, argv);
