@@ -41,10 +41,9 @@ void sent_message(int clientfd){
 	
 	sqlite3_close(db);
 }
-/*void recieve_messages(int chat_id, int user_id){
+void recieve_messages(int chat_id, int user_id){
 	sqlite3_stmt *stmt;
 	const char *sql = "SELECT USER_ID FROM Member WHERE CHAT_ID = ?";
-	sqlite3_bind_int(stmt, 1, chat_id);
 	int rc;
 
 	rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
@@ -54,6 +53,7 @@ void sent_message(int clientfd){
 		return -1;
 	}
 
+	sqlite3_bind_int(stmt, 1, chat_id);
 	int user_count = 0;
 
 	while (sqlite3_step(stmt) == SQLITE_ROW) user_count++;
@@ -66,13 +66,25 @@ void sent_message(int clientfd){
 		sqlite3_close(db);
 		return -1;
 	}
+	sqlite3_bind_int(stmt, 1, chat_id);
+	while (sqlite3_step(stmt) == SQLITE_ROW) {
 	
-	sqlite3_close(db);
+        rows[row_count].id = sqlite3_column_int(stmt, 0);  // Извлечение ID
+        const unsigned char *name = sqlite3_column_text(stmt, 1);
+        strncpy(rows[row_count].name, (const char *)name, sizeof(rows[row_count].name) - 1);
+        rows[row_count].value = sqlite3_column_double(stmt, 2);  // Извлечение числового значения
+
+        row_count++;
+    }
+
+    sqlite3_finalize(stmt);
+    sqlite3_close(db);
 
     for (int i = 0; i < row_count; i++) {
         printf("Row %d: ID=%d, Name=%s, Value=%.2f\n", i, rows[i].id, rows[i].name, rows[i].value);
     }
-}*/
+
+}
 
 
 void *client_handler(void *arg) {
@@ -87,6 +99,7 @@ void *client_handler(void *arg) {
                 }
 		switch(op_number){
 			case REGISTRATION:
+			
 			  	break;
 		  	case LOGIN: 
 				login_request(clientfd);

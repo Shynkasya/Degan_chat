@@ -14,7 +14,7 @@ void login_request(int sockfd) {
 	const char *login = json_string_value(json_object_get(root, "login"));//получаем значения по ключу
 	const char *passhash = json_string_value(json_object_get(root, "passhash"));
 
-	char *sql2 = "SELECT * FROM User WHERE Username = ? AND Password_Hash = ?;";//проверяем есть ли такой логин и хеш в бд
+	char *sql2 = "SELECT Id FROM User WHERE Username = ? AND Password_Hash = ?;";//проверяем есть ли такой логин и хеш в бд
 	sqlite3_stmt *stmt = NULL;
 	if (sqlite3_prepare_v2(db, sql2, -1, &stmt, NULL) != SQLITE_OK) {printf("%s\n", sqlite3_errmsg(db));};
 	if (sqlite3_bind_text(stmt, 1, login, -1, SQLITE_STATIC) != SQLITE_OK) {printf("%s\n", sqlite3_errmsg(db));};
